@@ -33,6 +33,16 @@ impl PhotocraftApp {
 
     /// Shared logic body. A wrapping host owns the final reset tail after its own work.
     pub fn logic_frame(&mut self, ctx: &egui::Context, frame: &mut eframe::Frame) {
+        self.logic_with_frame(ctx, Some(frame));
+    }
+
+    /// Background work for a host that owns the native frame.
+    pub fn logic_for_host(&mut self, ctx: &egui::Context) {
+        self.logic_with_frame(ctx, None);
+        self.finish_type_reset_logic(ctx);
+    }
+
+    fn logic_with_frame(&mut self, ctx: &egui::Context, frame: Option<&eframe::Frame>) {
         self.cap_frame_rate();
         i18n::set_current(i18n::Lang::from_pref(&self.session.prefs().interface.language));
         // Caps Lock state read from the OS once per frame (see `Services::caps_lock`): the canvas
@@ -81,7 +91,11 @@ impl PhotocraftApp {
         crate::dock::persist_pending(self, ctx);
         prefs_ui::tick(self, ctx);
         updates_ui::tick(self, ctx);
-        monitor_status::poll_frame(self, ctx, frame);
+        if let Some(frame) = frame {
+            monitor_status::poll_frame(self, ctx, frame);
+        } else {
+            monitor_status::poll(self, ctx);
+        }
         // Control requests and persisted preferences can change the language in this frame.
         i18n::sync_context(ctx, &self.session.prefs().interface.language);
         type_tool::sync_font_names(ctx, self.session.prefs().type_.show_font_names_in_english);
@@ -146,12 +160,30 @@ impl PhotocraftApp {
         if self.captures.any_unissued() || self.synthetic_batch.is_some() || !self.synthetic.is_empty() {
             ctx.send_viewport_cmd(egui::ViewportCommand::RequestPaintWhileHidden);
         }
-        self.poll_file_dialog(ctx, Some(frame));
+        self.poll_file_dialog(ctx, frame);
     }
 
     /// Shared UI body. A wrapping host must call `finish_type_reset_pass` after return,
     /// including when this body returns early without drawing an editor.
     pub fn ui_frame(&mut self, ui: &mut egui::Ui, frame: &mut eframe::Frame) {
+        self.ui_with_frame(ui, Some(frame));
+    }
+
+    /// Draw inside the host's UI without fabricating a native frame.
+    pub fn ui_for_host(&mut self, ui: &mut egui::Ui) {
+        self.ui_with_frame(ui, None);
+        self.finish_type_reset_pass(ui.ctx());
+    }
+
+    fn ui_with_frame(&mut self, ui: &mut egui::Ui, frame: Option<&eframe::Frame>) {
+        photocraft_compose::discard_unreadable_pixel_caches();
+        if let Err(error) = photocraft_raster::spill::check_integrity() {
+            self.ui.status = error;
+            self.ui.status_error = true;
+        } else if let Some(error) = photocraft_raster::spill::last_error() {
+            self.ui.status = error;
+            self.ui.status_error = true;
+        }
         let ctx = ui.ctx().clone();
         // One control owner even when this callback cannot draw the custom editor.
         if !self.fonts_ready
@@ -192,7 +224,7 @@ impl PhotocraftApp {
             return;
         }
         let t0 = gpu_canvas::now_ms();
-        self.perf.stage.ui_start(t0, frame.info().cpu_usage);
+        self.perf.stage.ui_start(t0, frame.and_then(|f| f.info().cpu_usage));
         // A software adapter or CPU mode chosen at startup is every document's reason.
         crate::render_path::frame(self);
         // Every frame that started its stage record closes it, whichever way `ui_body` returns.
@@ -233,7 +265,7 @@ impl PhotocraftApp {
         // polling it even when the platform would otherwise put the event loop to sleep.
         jobs_ui::keep_polling(self, &ctx);
         // Menus and buttons in this frame may have asked for a file dialog.
-        self.poll_file_dialog(&ctx, Some(frame));
+        self.poll_file_dialog(&ctx, frame);
         // The Type tool's IME descriptor is the last writer of this pass: every panel and the
         // canvas have finished mutating the model, and an absent/focus-moved editor ends here.
         type_tool::sync_ime(self, &ctx);

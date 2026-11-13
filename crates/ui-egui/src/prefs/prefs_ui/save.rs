@@ -1,4 +1,4 @@
-use super::appearance::{canvas_style, sync_appearance, sync_display_scale, sync_tooltips};
+use super::appearance::canvas_style;
 use super::startup::{load, presets_store, recovery, sync_rulers};
 use super::{DocId, HashMap, PhotocraftApp, Value, prefs};
 
@@ -9,11 +9,8 @@ pub fn tick(app: &mut PhotocraftApp, ctx: &egui::Context) {
     }
     recovery(app);
     sync_rulers(app);
-    sync_display_scale(app, ctx);
-    sync_appearance(app, ctx);
-    crate::theme::set_ui_font_size(ctx, app.session.prefs().interface.ui_font_size);
+    super::install_look(app, ctx);
     presets_store(app);
-    sync_tooltips(app, ctx);
     app.sync_recent();
     // Monotonic, not `ctx.input(|i| i.time)`: logic also runs on hidden ticks, where egui's input
     // time is that of the last UI pass.

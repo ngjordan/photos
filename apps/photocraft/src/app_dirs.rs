@@ -519,4 +519,5 @@ fn ensure_writable(dir: &Path) -> std::io::Result<()> {
 }
 
 #[cfg(test)]
+#[path = "app_dirs/tests.rs"]
 mod tests;

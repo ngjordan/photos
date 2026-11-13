@@ -46,6 +46,15 @@ impl PhotocraftApp {
 }
 
 impl PhotocraftApp {
+    /// Install the saved look before a hosted module's first pass.
+    pub fn install_host_look(&mut self, ctx: &egui::Context) -> egui::FontDefinitions {
+        crate::prefs_ui::install_look(self, ctx);
+        crate::i18n::sync_context(ctx, &self.session.prefs().interface.language);
+        Self::setup_context(ctx, self.ui.theme);
+        self.styled = true;
+        theme::font_definitions(ctx)
+    }
+
     /// Install fonts, image loaders and the theme. Call from the app creator (and again for a
     /// replacement Context) before the first `run_ui` so the very first frame renders and the
     /// Type reset begin/end pass markers exist; otherwise `logic` does it and the first frame is

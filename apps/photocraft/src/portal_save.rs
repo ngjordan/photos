@@ -192,4 +192,5 @@ pub fn save_as(conn: &zbus::blocking::Connection, mut req: SaveRequest) -> Resul
 }
 
 #[cfg(test)]
+#[path = "portal_save/tests.rs"]
 mod tests;

@@ -246,7 +246,7 @@ impl PhotocraftApp {
 }
 
 impl eframe::App for PhotocraftApp {
-    fn on_exit(&mut self) {
+    fn on_exit(&mut self, _gl: Option<&eframe::glow::Context>) {
         if let Err(err) = tool_memory::save_on_exit(self) {
             log::warn!("Preferences: could not save the final tool state: {err}");
         }
@@ -303,14 +303,6 @@ impl eframe::App for PhotocraftApp {
     }
 
     fn ui(&mut self, ui: &mut egui::Ui, frame: &mut eframe::Frame) {
-        photocraft_compose::discard_unreadable_pixel_caches();
-        if let Err(error) = photocraft_raster::spill::check_integrity() {
-            self.ui.status = error;
-            self.ui.status_error = true;
-        } else if let Some(error) = photocraft_raster::spill::last_error() {
-            self.ui.status = error;
-            self.ui.status_error = true;
-        }
         self.ui_frame(ui, frame);
         self.finish_type_reset_pass(ui.ctx());
     }

@@ -852,6 +852,12 @@ pub fn install_fonts(ctx: &egui::Context) {
 
 /// [`install_fonts`] with the CJK and other-script fallback fonts taken from `cjk` (tests swap the sources).
 pub fn install_fonts_with(ctx: &egui::Context, cjk: crate::cjk_fonts::Sources) {
+    let fonts = font_definitions(ctx);
+    install_font_definitions(ctx, fonts, cjk);
+}
+
+/// The exact queued font set, available even before the context's first pass.
+pub fn font_definitions(ctx: &egui::Context) -> FontDefinitions {
     // egui's default fonts stay last in the stack, for symbols and emoji Inter lacks.
     let mut fonts = crate::egui_fonts::definitions();
     // The bundled fonts are inflated on first use (photocraft_text::fonts). Should one ever fail
@@ -894,10 +900,14 @@ pub fn install_fonts_with(ctx: &egui::Context, cjk: crate::cjk_fonts::Sources) {
         stack.extend(fallback.iter().cloned());
         fonts.families.insert(FontFamily::Name(fam.into()), stack);
     }
-    let size = ui_font_size(ctx);
     for (name, data) in &mut fonts.font_data {
         size_ui_font(ctx, name, Arc::make_mut(data));
     }
+    fonts
+}
+
+fn install_font_definitions(ctx: &egui::Context, fonts: FontDefinitions, cjk: crate::cjk_fonts::Sources) {
+    let size = ui_font_size(ctx);
     ctx.set_fonts(fonts);
     // egui keeps the first plugin of a type, so a re-install (language change) resets the
     // existing one. The new definitions land next pass: the plugin must not rescale before then.

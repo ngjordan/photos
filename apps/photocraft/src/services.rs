@@ -12,6 +12,7 @@ use std::rc::Rc;
 use std::sync::Arc;
 
 #[cfg(test)]
+#[path = "services/recovery_tests.rs"]
 mod recovery_tests;
 
 /// Everything File › Open reads: PhotoCraft, Photoshop, OpenRaster, Krita and Affinity documents, flat images, and
@@ -893,4 +894,5 @@ fn platform_beep() {
 }
 
 #[cfg(test)]
+#[path = "services/tests.rs"]
 mod tests;

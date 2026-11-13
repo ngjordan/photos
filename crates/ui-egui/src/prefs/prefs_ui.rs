@@ -64,6 +64,20 @@ pub struct Runtime {
 
 pub use crate::shortcuts::{default_shortcut, effective_shortcut};
 
+/// Install only the saved interface look, without starting recovery or autosave.
+pub fn install_look(app: &mut PhotocraftApp, ctx: &egui::Context) {
+    appearance::sync_display_scale(app, ctx);
+    appearance::sync_appearance(app, ctx);
+    crate::theme::set_ui_font_size(ctx, app.session.prefs().interface.ui_font_size);
+    appearance::sync_tooltips(app, ctx);
+}
+
+/// The module's own zoom, not the previous module's pending context zoom.
+pub fn interface_zoom(app: &PhotocraftApp, ctx: &egui::Context) -> f32 {
+    let native = ctx.native_pixels_per_point().filter(|v| v.is_finite() && *v > 0.0).unwrap_or(1.0);
+    appearance::display_scale(app.session.prefs().interface.ui_scale, Some(native)) / native
+}
+
 mod appearance;
 mod dialogs;
 mod fields;

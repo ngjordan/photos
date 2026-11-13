@@ -1979,7 +1979,7 @@ dependencies = [
 [[package]]
 name = "ecolor"
 version = "0.37.0"
-source = "git+https://github.com/storytold/egui.git?rev=6d518fc799681571963842f95b55a6b68431b15a#6d518fc799681571963842f95b55a6b68431b15a"
+source = "git+https://github.com/ngjordan/egui.git?rev=faf1ced22250c509636bff2578731a0be86a69ac#faf1ced22250c509636bff2578731a0be86a69ac"
 dependencies = [
  "bytemuck",
  "emath",
@@ -1989,7 +1989,7 @@ dependencies = [
 [[package]]
 name = "eframe"
 version = "0.37.0"
-source = "git+https://github.com/storytold/egui.git?rev=6d518fc799681571963842f95b55a6b68431b15a#6d518fc799681571963842f95b55a6b68431b15a"
+source = "git+https://github.com/ngjordan/egui.git?rev=faf1ced22250c509636bff2578731a0be86a69ac#faf1ced22250c509636bff2578731a0be86a69ac"
 dependencies = [
  "ahash",
  "bytemuck",
@@ -2026,7 +2026,7 @@ dependencies = [
 [[package]]
 name = "egui"
 version = "0.37.0"
-source = "git+https://github.com/storytold/egui.git?rev=6d518fc799681571963842f95b55a6b68431b15a#6d518fc799681571963842f95b55a6b68431b15a"
+source = "git+https://github.com/ngjordan/egui.git?rev=faf1ced22250c509636bff2578731a0be86a69ac#faf1ced22250c509636bff2578731a0be86a69ac"
 dependencies = [
  "accesskit",
  "ahash",
@@ -2047,7 +2047,7 @@ dependencies = [
 [[package]]
 name = "egui-wgpu"
 version = "0.37.0"
-source = "git+https://github.com/storytold/egui.git?rev=6d518fc799681571963842f95b55a6b68431b15a#6d518fc799681571963842f95b55a6b68431b15a"
+source = "git+https://github.com/ngjordan/egui.git?rev=faf1ced22250c509636bff2578731a0be86a69ac#faf1ced22250c509636bff2578731a0be86a69ac"
 dependencies = [
  "ahash",
  "bytemuck",
@@ -2066,7 +2066,7 @@ dependencies = [
 [[package]]
 name = "egui-winit"
 version = "0.37.0"
-source = "git+https://github.com/storytold/egui.git?rev=6d518fc799681571963842f95b55a6b68431b15a#6d518fc799681571963842f95b55a6b68431b15a"
+source = "git+https://github.com/ngjordan/egui.git?rev=faf1ced22250c509636bff2578731a0be86a69ac#faf1ced22250c509636bff2578731a0be86a69ac"
 dependencies = [
  "accesskit_winit",
  "arboard",
@@ -2092,7 +2092,7 @@ dependencies = [
 [[package]]
 name = "egui_extras"
 version = "0.37.0"
-source = "git+https://github.com/storytold/egui.git?rev=6d518fc799681571963842f95b55a6b68431b15a#6d518fc799681571963842f95b55a6b68431b15a"
+source = "git+https://github.com/ngjordan/egui.git?rev=faf1ced22250c509636bff2578731a0be86a69ac#faf1ced22250c509636bff2578731a0be86a69ac"
 dependencies = [
  "ahash",
  "egui",
@@ -2106,7 +2106,7 @@ dependencies = [
 [[package]]
 name = "egui_glow"
 version = "0.37.0"
-source = "git+https://github.com/storytold/egui.git?rev=6d518fc799681571963842f95b55a6b68431b15a#6d518fc799681571963842f95b55a6b68431b15a"
+source = "git+https://github.com/ngjordan/egui.git?rev=faf1ced22250c509636bff2578731a0be86a69ac#faf1ced22250c509636bff2578731a0be86a69ac"
 dependencies = [
  "bytemuck",
  "egui",
@@ -2119,7 +2119,7 @@ dependencies = [
 [[package]]
 name = "egui_kittest"
 version = "0.37.0"
-source = "git+https://github.com/storytold/egui.git?rev=6d518fc799681571963842f95b55a6b68431b15a#6d518fc799681571963842f95b55a6b68431b15a"
+source = "git+https://github.com/ngjordan/egui.git?rev=faf1ced22250c509636bff2578731a0be86a69ac#faf1ced22250c509636bff2578731a0be86a69ac"
 dependencies = [
  "dify",
  "eframe",
@@ -2145,7 +2145,7 @@ checksum = "0e9c71c2167ca323c882b99918929403426e2373ea17242ff5653e0d5e1058be"
 [[package]]
 name = "emath"
 version = "0.37.0"
-source = "git+https://github.com/storytold/egui.git?rev=6d518fc799681571963842f95b55a6b68431b15a#6d518fc799681571963842f95b55a6b68431b15a"
+source = "git+https://github.com/ngjordan/egui.git?rev=faf1ced22250c509636bff2578731a0be86a69ac#faf1ced22250c509636bff2578731a0be86a69ac"
 dependencies = [
  "bytemuck",
  "serde",
@@ -2226,7 +2226,7 @@ dependencies = [
 [[package]]
 name = "epaint"
 version = "0.37.0"
-source = "git+https://github.com/storytold/egui.git?rev=6d518fc799681571963842f95b55a6b68431b15a#6d518fc799681571963842f95b55a6b68431b15a"
+source = "git+https://github.com/ngjordan/egui.git?rev=faf1ced22250c509636bff2578731a0be86a69ac#faf1ced22250c509636bff2578731a0be86a69ac"
 dependencies = [
  "ahash",
  "bytemuck",
@@ -2253,7 +2253,7 @@ dependencies = [
 [[package]]
 name = "epaint_default_fonts"
 version = "0.37.0"
-source = "git+https://github.com/storytold/egui.git?rev=6d518fc799681571963842f95b55a6b68431b15a#6d518fc799681571963842f95b55a6b68431b15a"
+source = "git+https://github.com/ngjordan/egui.git?rev=faf1ced22250c509636bff2578731a0be86a69ac#faf1ced22250c509636bff2578731a0be86a69ac"
 
 [[package]]
 name = "equator"
@@ -3659,6 +3659,60 @@ name = "ipnet"
 version = "2.12.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "791930b43c0d5973160d90a8f3894509f2b273430f5c5c73b668636d0287c5c0"
+
+[[package]]
+name = "iridium-photos-shell"
+version = "0.23.1"
+dependencies = [
+ "arboard",
+ "async-io",
+ "base64 0.22.1",
+ "blake3",
+ "chrono",
+ "clap",
+ "core-graphics2",
+ "craft-update",
+ "dispatch2",
+ "eframe",
+ "egui",
+ "fmv-macos-events",
+ "futures-lite",
+ "log",
+ "muda",
+ "objc2 0.6.5",
+ "objc2-app-kit 0.3.2",
+ "objc2-foundation 0.3.2",
+ "open",
+ "photocraft-automation",
+ "photocraft-cms",
+ "photocraft-codecs",
+ "photocraft-color",
+ "photocraft-compose",
+ "photocraft-doc",
+ "photocraft-engine",
+ "photocraft-format",
+ "photocraft-geom",
+ "photocraft-io",
+ "photocraft-raster",
+ "photocraft-tablet",
+ "photocraft-ui-egui",
+ "plist",
+ "resvg",
+ "rfd",
+ "ron",
+ "roxmltree 0.21.2",
+ "rustix 1.1.5",
+ "serde",
+ "serde_json",
+ "tempfile",
+ "thiserror 2.0.21",
+ "winit",
+ "winsafe",
+ "wl-clipboard-rs",
+ "x11rb",
+ "xcap",
+ "zbus",
+]
 
 [[package]]
 name = "is-docker"
@@ -9593,7 +9647,7 @@ checksum = "d6bbff5f0aada427a1e5a6da5f1f98158182f26556f345ac9e04d36d0ebed650"
 [[package]]
 name = "winit"
 version = "0.30.13"
-source = "git+https://github.com/storytold/winit.git?rev=a517b3846ee8457d84ee4975110bfda6797c44dc#a517b3846ee8457d84ee4975110bfda6797c44dc"
+source = "git+https://github.com/ngjordan/winit.git?rev=a517b3846ee8457d84ee4975110bfda6797c44dc#a517b3846ee8457d84ee4975110bfda6797c44dc"
 dependencies = [
  "ahash",
  "android-activity",
@@ -10297,14 +10351,14 @@ dependencies = [
 [[patch.unused]]
 name = "egui_demo_lib"
 version = "0.37.0"
-source = "git+https://github.com/storytold/egui.git?rev=6d518fc799681571963842f95b55a6b68431b15a#6d518fc799681571963842f95b55a6b68431b15a"
+source = "git+https://github.com/ngjordan/egui.git?rev=faf1ced22250c509636bff2578731a0be86a69ac#faf1ced22250c509636bff2578731a0be86a69ac"
 
 [[patch.unused]]
 name = "egui_inspection"
 version = "0.37.0"
-source = "git+https://github.com/storytold/egui.git?rev=6d518fc799681571963842f95b55a6b68431b15a#6d518fc799681571963842f95b55a6b68431b15a"
+source = "git+https://github.com/ngjordan/egui.git?rev=faf1ced22250c509636bff2578731a0be86a69ac#faf1ced22250c509636bff2578731a0be86a69ac"
 
 [[patch.unused]]
 name = "egui_system_font_provider"
 version = "0.37.0"
-source = "git+https://github.com/storytold/egui.git?rev=6d518fc799681571963842f95b55a6b68431b15a#6d518fc799681571963842f95b55a6b68431b15a"
+source = "git+https://github.com/ngjordan/egui.git?rev=faf1ced22250c509636bff2578731a0be86a69ac#faf1ced22250c509636bff2578731a0be86a69ac"

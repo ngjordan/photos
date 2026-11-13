@@ -571,4 +571,5 @@ pub fn read_rendering_prefs(path: Option<&Path>) -> (GpuBackend, RenderingMode) 
 }
 
 #[cfg(test)]
+#[path = "gpu_startup/tests.rs"]
 mod tests;
