@@ -27,7 +27,6 @@ photocraft-engine = { workspace = true }
 photocraft-codecs = { workspace = true }
 photocraft-io = { workspace = true }
 photocraft-format = { workspace = true }
-photocraft-automation = { workspace = true }
 photocraft-ui-egui = { workspace = true }
 # Pen tablet pressure/tilt on macOS and X11 (the workspace's one isolated unsafe helper crate).
 photocraft-tablet = { workspace = true }
@@ -42,6 +41,8 @@ clap = { workspace = true }
 thiserror = { workspace = true }
 
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+# Pulls `cap-std`, which has no wasm32 build: native only.
+photocraft-automation = { workspace = true }
 tempfile = "=3.27.0"
 roxmltree = "0.21"
 craft-update = { workspace = true }

@@ -36,7 +36,7 @@ photocraft-codecs = { workspace = true }
 craft-psd = { workspace = true }
 egui = { workspace = true }
 egui_extras = { version = "0.37", default-features = false, features = ["svg"] }
-eframe = { workspace = true, features = ["wgpu", "accesskit", "clipboard"] }
+eframe = { workspace = true, features = ["wgpu","accesskit", "clipboard"] }
 serde = { workspace = true }
 serde_json = { workspace = true }
 log = { workspace = true }

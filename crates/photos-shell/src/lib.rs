@@ -3,42 +3,54 @@
 
 // These remain shared with the standalone binary: file formats, recovery paths and platform
 // behavior must not acquire a second implementation when the editor is hosted.
+#[cfg(not(target_arch = "wasm32"))]
 #[allow(dead_code)] // Shared standalone-only entrypoints are intentionally unused by the host.
 #[path = "../../../apps/photocraft/src/app_dirs.rs"]
 mod app_dirs;
+#[cfg(not(target_arch = "wasm32"))]
 #[allow(dead_code)] // Shared standalone-only entrypoints are intentionally unused by the host.
 #[path = "../../../apps/photocraft/src/appearance.rs"]
 mod appearance;
+#[cfg(not(target_arch = "wasm32"))]
 #[allow(dead_code)] // Shared standalone-only entrypoints are intentionally unused by the host.
 #[path = "../../../apps/photocraft/src/crash_guard.rs"]
 mod crash_guard;
+#[cfg(not(target_arch = "wasm32"))]
 #[allow(dead_code)] // Shared standalone-only entrypoints are intentionally unused by the host.
 #[path = "../../../apps/photocraft/src/external_svg.rs"]
 mod external_svg;
+#[cfg(not(target_arch = "wasm32"))]
 #[allow(dead_code)] // Shared standalone-only entrypoints are intentionally unused by the host.
 #[path = "../../../apps/photocraft/src/file_dialog_probe.rs"]
 mod file_dialog_probe;
+#[cfg(not(target_arch = "wasm32"))]
 #[allow(dead_code)] // Shared standalone-only entrypoints are intentionally unused by the host.
 #[path = "../../../apps/photocraft/src/gpu_startup.rs"]
 mod gpu_startup;
 #[cfg(any(target_os = "linux", test))]
+#[cfg(not(target_arch = "wasm32"))]
 #[allow(dead_code)] // Shared standalone-only entrypoints are intentionally unused by the host.
 #[path = "../../../apps/photocraft/src/linux_libs.rs"]
 mod linux_libs;
 #[cfg(target_os = "macos")]
+#[cfg(not(target_arch = "wasm32"))]
 #[allow(dead_code)] // Shared standalone-only entrypoints are intentionally unused by the host.
 #[path = "../../../apps/photocraft/src/mac_menu.rs"]
 mod mac_menu;
+#[cfg(not(target_arch = "wasm32"))]
 #[allow(dead_code)] // Shared standalone-only entrypoints are intentionally unused by the host.
 #[path = "../../../apps/photocraft/src/photoshop_settings.rs"]
 mod photoshop_settings;
 #[cfg(target_os = "linux")]
+#[cfg(not(target_arch = "wasm32"))]
 #[allow(dead_code)] // Shared standalone-only entrypoints are intentionally unused by the host.
 #[path = "../../../apps/photocraft/src/portal_save.rs"]
 mod portal_save;
+#[cfg(not(target_arch = "wasm32"))]
 #[allow(dead_code)] // Shared standalone-only entrypoints are intentionally unused by the host.
 #[path = "../../../apps/photocraft/src/services.rs"]
 mod services;
+#[cfg(not(target_arch = "wasm32"))]
 #[allow(dead_code)] // Shared standalone-only entrypoints are intentionally unused by the host.
 #[path = "../../../apps/photocraft/src/updates.rs"]
 mod updates;
@@ -78,10 +90,17 @@ impl Shell {
 
     /// Preferences and recovery use the existing profile, not eframe storage.
     pub fn new_for_host(ctx: &egui::Context, _storage: Option<&dyn eframe::Storage>, launch: Launch) -> Self {
-        let mut services = services::native(None);
-        // Updates and process/window ownership belong to Workspace, not a hosted editor.
-        services.check_updates = None;
-        services.preset_store = services::presets_dir().map(photocraft_engine::preset_store::open_dir_async);
+        // The native file dialogs, clipboard and preset folder do not exist in a browser tab: no services on wasm32.
+        #[cfg(target_arch = "wasm32")]
+        let services = photocraft_ui_egui::Services::default();
+        #[cfg(not(target_arch = "wasm32"))]
+        let services = {
+            let mut services = services::native(None);
+            // Updates and process/window ownership belong to Workspace, not a hosted editor.
+            services.check_updates = None;
+            services.preset_store = services::presets_dir().map(photocraft_engine::preset_store::open_dir_async);
+            services
+        };
         let mut app = PhotocraftApp::new(Session::new(), services);
         app.background_jobs = true;
         let fonts = app.install_host_look(ctx);
@@ -114,7 +133,7 @@ impl Shell {
 
     /// The host negotiates close first. Do not dispatch file.exit (it closes the shared window).
     pub fn save_state(&mut self) {
-        self.app.on_exit(None);
+        self.app.on_exit();
     }
 
     pub fn can_close(&self) -> bool {
