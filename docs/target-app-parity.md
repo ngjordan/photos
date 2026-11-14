@@ -15,7 +15,7 @@ the measured checklists are [`scorecard.md`](scorecard.md) (`cargo xtask scoreca
 | Number | Value | Kind |
 |---|---|---|
 | 2026-10-29 | minor | Stability row: web build memory handling (#10024), memory checks before big operations, a low-memory warning and a stopped page for a trap; no percentage or estimate changed |
-| **Feature breadth** (does each Photoshop feature exist?) | **~76%** | partly measured (menus, tools, panels, formats), weights below |
+| **Feature breadth** (does each Photoshop feature exist?) |**[parity/parity.md](../parity/parity.md)**| partly measured (menus, tools, panels, formats), weights below |
 | **Ready for real work** (could a professional replace Photoshop with it?) | **~45%** (range 40–50%) | estimated, weights and evidence below |
 | **Mainstream practitioner** (typical pro, weekly areas only) | **~43%** (38–48%) | estimated, [method](#mainstream-practitioner-43) |
 | **Essentials user** (core features only) | **~61%** (55–67%) | estimated, [method](#essentials-user-61) |
@@ -57,7 +57,7 @@ architecture and the PSD writer are the serial parts.
 - User reports on GitHub (`storytold/photocraft`, 579 open issues on 2026-10-10) as evidence of
   depth and feel. Adobe's documentation and release notes for behaviour not visible in the bundle.
 
-## Feature breadth: ~76% (weighted)
+## Feature breadth: [parity/parity.md](parity/parity.md) (weighted)
 
 | Component | Weight | Ours / Photoshop | % | Kind |
 |---|---:|---|---:|---|
