@@ -390,7 +390,7 @@ note = "Adobe account services (cloud docs, Libraries, Firefly credits, Behance,
 
 [verdict."stock-fonts-marketplace-creative-cloud-sync"]
 title = "Stock / Fonts marketplace / Creative Cloud sync"
-verdict = "ABSENT"
+verdict = "NA"
 level = "read"
-evidence = ["docs/target-app-parity.md:490"]
-note = "No Adobe Fonts / Stock / CC sync; local font library only (type.font.library)."
+evidence = ["crates/engine/src/cmd/font_library_cmds.rs:92", "docs/target-app-parity.md:490"]
+note = "Adobe Stock, Adobe Fonts and Creative Cloud sync are Adobe account services, out of scope for a desktop app, the same call as the row for cloud documents and Firefly credits. The local font library is type.font.library (font_library_cmds.rs:92); there is no Adobe Stock, Typekit or Creative Cloud code in the crate."
