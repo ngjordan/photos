@@ -75,8 +75,13 @@ fn render_start_actions_row(app: &mut PhotocraftApp, ui: &mut egui::Ui, avail_w:
         }
         ui.painter().rect_stroke(open_rect, 4.0, egui::Stroke::new(1.0, t.separator), egui::StrokeKind::Inside);
         ui.painter().text(open_rect.center(), egui::Align2::CENTER_CENTER, open_label, crate::theme::semibold(13.0), t.text);
-        if open_resp.clicked() {
-            let _ = app.open_dialog_file();
+        if open_resp.clicked()
+            && let Err(e) = app.open_dialog_file()
+        {
+            // The dialog is already open, or the host refused: say so, rather
+            // than leaving the button looking like it did nothing.
+            app.ui.status = e;
+            app.ui.status_error = true;
         }
     });
 }
