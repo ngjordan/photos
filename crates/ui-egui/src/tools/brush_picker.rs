@@ -564,7 +564,7 @@ fn gear_menu(ui: &mut egui::Ui, current: Option<&str>, presets: &[BrushPreset], 
                 }
                 // Checked by default in Photoshop; greyed until their function lands.
                 Gear::AdditionalInfo | Gear::RecentBrushes => {
-                    ui.add_enabled(false, egui::Checkbox::new(&mut true, label));
+                    ui.add_enabled(false, egui::Checkbox::new(&mut true, label)).on_disabled_hover_text(tl!("Not available yet"));
                 }
                 _ => {
                     let enabled = !item.placeholder() && (!item.needs_preset() || current.is_some());

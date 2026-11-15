@@ -845,6 +845,7 @@ pub(super) fn path_alignment_menu(_app: &mut PhotocraftApp, ui: &mut egui::Ui) {
     // Stays open while the Align To dropdown is used.
     egui::Popup::menu(&resp).close_behavior(egui::PopupCloseBehavior::CloseOnClickOutside).show(|ui| {
         ui.set_min_width(240.0);
+        ui.weak(tl!("Not available yet: paths can't be aligned or distributed."));
         ui.label(tl!("Align:"));
         for (label, glyph) in PATH_ALIGN_ENTRIES {
             ui.add_enabled_ui(false, |ui| path_op_button(ui, glyph, tl!(label), false));

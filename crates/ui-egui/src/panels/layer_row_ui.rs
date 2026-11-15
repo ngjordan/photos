@@ -305,11 +305,8 @@ pub fn panel_menu(app: &mut crate::PhotocraftApp, ui: &mut egui::Ui) {
             ui.close();
         }
     });
-    // Animation Options control Photoshop's frame-unification buttons. PhotoCraft's Layers
-    // panel does not expose those buttons; do not offer nonfunctional toggles.
-    ui.add_enabled_ui(false, |ui| {
-        ui.menu_button(tl!("Animation Options"), |_ui| {});
-    });
+    // (no Animation Options: its frame-unification buttons don't exist here, and an empty greyed
+    // submenu is a control that does nothing)
     if ui.button(tl!("Panel Options…")).clicked() {
         let mut options = app.ui.layers_panel_options.clone();
         options.thumbnail_contents = crate::layers_panel_ui::thumbnail_contents(app);
